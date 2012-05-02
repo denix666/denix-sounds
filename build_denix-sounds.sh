@@ -1,7 +1,7 @@
 #! /bin/bash
 
 PROJECT_DIR=`dirname $(which $0)`
-SPEC_FILE="${PROJECT_DIR}/denix-sounds.spec"
+SPEC_FILE="${PROJECT_DIR}/$(basename ${PROJECT_DIR}).spec"
 TARGET_OS="x1"
 BUILD_SOURCE="yes"
 
@@ -57,13 +57,15 @@ mkdir ${TMP_DIR}/${PK_NAME}
 
 # Copy sources to temp dir
 for i in bin sbin etc lib usr var srv opt; do
-    if [ -e $i ]; then
-	cp -r ${PROJECT_DIR}/$i ${TMP_DIR}/${PK_NAME}
+    if [ -e ${PROJECT_DIR}/$i ]; then
+	echo "Copying directory: $i"
+	cp -Rf ${PROJECT_DIR}/$i ${TMP_DIR}/${PK_NAME}
     fi
 done
 
 # Create the tarball
 pushd ${TMP_DIR} >/dev/null 2>&1
+rm -rf ${TOPDIR}/SOURCES/${PK_NAME}.tar.gz
 tar cvfz ${TOPDIR}/SOURCES/${PK_NAME}.tar.gz ${PK_NAME} >/dev/null 2>&1
 popd >/dev/null 2>&1
 
