@@ -2,7 +2,7 @@
 
 PROJECT_DIR=`dirname $(which $0)`
 SPEC_FILE="${PROJECT_DIR}/$(basename ${PROJECT_DIR}).spec"
-TARGET_OS="x1 fc18 fc19"
+TARGET_OS="fc20"
 BUILD_SOURCE="yes"
 
 # Check if required packages installed
